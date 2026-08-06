@@ -22,6 +22,9 @@ model User {
   profileImage String?   @map("profile_image")
   createdAt    DateTime  @default(now()) @map("created_at")
   articles     Article[]
+  following    Follow[]  @relation("follower")
+  followers    Follow[]  @relation("following")
+  favorites    Article[] @relation("favorites")
 
   @@map("users")
 }
@@ -37,6 +40,7 @@ model Article {
   author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    Int      @map("author_id")
   tags        Tag[]
+  favoritedBy User[]   @relation("favorites")
 
   @@map("articles")
 }
@@ -47,4 +51,16 @@ model Tag {
   articles Article[]
 
   @@map("tags")
+}
+
+model Follow {
+  id          Int      @id @default(autoincrement())
+  followerId  Int      @map("follower_id")
+  followingId Int      @map("following_id")
+  folower     User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@unique([followerId, followingId])
+  @@map("follows")
 }
