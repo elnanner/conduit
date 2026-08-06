@@ -52,7 +52,7 @@ conduit/
    docker compose up -d
    ```
 
-3. Configurar las variables de entorno del backend: copiar `apps/api/.env.example` a `apps/api/.env` y completar `DATABASE_URL` con las credenciales del `docker-compose.yml`.
+3. Configurar las variables de entorno del backend: copiar `apps/api/.env.example` a `apps/api/.env`, completar `DATABASE_URL` con las credenciales del `docker-compose.yml`, y generar un valor random para `JWT_SECRET` (por ejemplo con `openssl rand -base64 48`).
 
 4. Aplicar las migraciones de Prisma:
 
@@ -77,8 +77,8 @@ conduit/
 En desarrollo activo, fase por fase.
 
 - [x] Fase 0 — Setup y arquitectura
-- [ ] Fase 1 — Autenticación y modelo de Usuario
-- [ ] Fase 2 — Artículos (CRUD) + Tags
+- [x] Fase 1 — Autenticación y modelo de Usuario
+- [x] Fase 2 — Artículos (CRUD) + Tags
 - [ ] Fase 3 — Relaciones sociales: Follow + Favoritos + Feed
 - [ ] Fase 4 — Comentarios
 - [ ] Fase 5 — Testing
